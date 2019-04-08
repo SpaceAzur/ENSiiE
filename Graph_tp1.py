@@ -4,53 +4,48 @@ import mpmath
 import numpy as np 
 import scipy
 
-graph = [[1,2],[2],[3],[]]
+graph1 = [[1,2],[2],[3],[]]
 
-test = [[1,2,4],[3],[0,3,5],[],[4,5],[4]]
+graph2 = [[1,2,4],[3],[0,3,5],[],[4,5],[4]]
 
-exo = [[1,3],[],[1,4],[5],[2,3],[]]
+graph3 = [[1,3],[],[1,4],[5],[2,3],[]]
 
-# Initialise une matrice vierge de même taille que la matrice étudiée
-def new_matrix(matr):
-    virgin_matrix = np.zeros((len(matr),len(matr)))
-    return virgin_matrix
-
-# Construit la matrice d'adjacence
-# input : matrice étudiée, matrice vierge de même dimension
-def adjacence(matr,virgin_matr):
-    adj_matrix = virgin_matr
+# | Construit la matrice d'adjacence
+# | input : matrice étudiée
+def adjacence(matr):
+    adj_matrix = np.zeros((len(matr),len(matr)))  # initialise matrice vierge de même dimension
     for (i , sommet) in enumerate(matr):
         for (j , nex) in enumerate(sommet):
             adj_matrix[i][nex]=1
     return adj_matrix
 
-# adj_matrix_sauvegarde = adjacence(test,new_matrix(test))
-
-# Construit la matrice de fermeture transitive
-# Input : matrice d'adjacence
-def transitiveClosure(ferm_trans):
-    for (i, colonne) in enumerate(ferm_trans):
+# | Construit la matrice de fermeture transitive
+# | Input : matrice d'adjacence
+def transitiveClosure(adj_matr):
+    for (i, colonne) in enumerate(adj_matr):
         for (k, valeur) in enumerate(colonne):
-            if ferm_trans[i][k] == 1 :
+            if adj_matr[i][k] == 1 :
                 for (k, valeur) in enumerate(colonne):
-                    if colonne[k] == 1 :
-                        ferm_trans[i] = ferm_trans[i] + ferm_trans[k]
+                    if colonne[k] == 1 :                            # si transitivité, j'additionne la ligne k avec la ligne i
+                        adj_matr[i] = adj_matr[i] + adj_matr[k]  # permet de ne pas toucher aux zeros
                     else:
                         continue
             else:
                 continue
-
-    for (i, colonne) in enumerate(ferm_trans):
+    # | je reattribue la valeur 1 dans les cases differentes de zero
+    for (i, colonne) in enumerate(adj_matr):
         for (k, valeur) in enumerate(colonne):
-            if ferm_trans[i][k] >= 1:
-                ferm_trans[i][k] = 1
+            if adj_matr[i][k] >= 1:
+                adj_matr[i][k] = 1
+    ferm_trans = adj_matr
     return ferm_trans
 
-# print("matrice d'adjacence\n", adj_matrix_sauvegarde)
-# res = transitiveClosure(adj_matrix_sauvegarde)
-# print("matrice de fermeture transitive", res)
+adj_mat = adjacence(graph3)
+print("\nmatrice d'adjacence\n", adj_mat)
+trans_mat = transitiveClosure(adj_mat)
+print("\nfermeture transitive\n", trans_mat)
 
-sauve_exo = adjacence(exo, new_matrix(exo))
-print(sauve_exo)
-res_exo = transitiveClosure(sauve_exo)
-print(res_exo)
+with open("test_graph", encoding='utf-8') as file:
+    test = file.read()
+
+
