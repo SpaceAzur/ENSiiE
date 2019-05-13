@@ -3,6 +3,8 @@
 import mpmath
 import numpy as np 
 import scipy
+from collections import deque
+import sys
 
 graph1 = [[1,2],[2],[3],[]]
 
@@ -40,12 +42,23 @@ def transitiveClosure(adj_matr):
     ferm_trans = adj_matr
     return ferm_trans
 
-adj_mat = adjacence(graph3)
+adj_mat = adjacence(graph2)
+adj_mat = adj_mat.astype(int)
 print("\nmatrice d'adjacence\n", adj_mat)
 trans_mat = transitiveClosure(adj_mat)
 print("\nfermeture transitive\n", trans_mat)
 
-with open("test_graph", encoding='utf-8') as file:
-    test = file.read()
 
+def parcourirMatrice(adj_mat, indice):
+    for (i, sommet) in enumerate(adj_mat):
+        if sommet[i] != 0:
+            indice = i
+            parcourirMatrice(adj_mat, sommet[indice])
+        else:
+            continue
+    return 0
+
+# https://stackoverflow.com/questions/32600020/recursive-depth-first-search-algorithm
+
+# https://www.programiz.com/dsa/graph-dfs  TESTER CELUI LA => BIEN EXPLIQUER !!!! :-)
 
