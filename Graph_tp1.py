@@ -5,6 +5,7 @@ import numpy as np
 import scipy
 from collections import deque
 import sys
+from tarjan import *
 
 graph1 = [[1,2],[2],[3],[]]
 
@@ -14,6 +15,9 @@ graph3 = [[1,3],[],[1,4],[5],[2,3],[]]
 
 graph4 = [[1,2,3],[2,5],[4],[],[],[6],[]]
 
+print("\ntest sur graphe suivant :", graph1)
+
+#----------------------------------------------------------------------------------------------
 # | Construit la MATRICE D ADJACENCE
 # | input : matrice étudiée
 def adjacence(matr):
@@ -23,6 +27,7 @@ def adjacence(matr):
             adj_matrix[i][nex]=1
     return adj_matrix
 
+#----------------------------------------------------------------------------------------------
 # | Construit la matrice de FERMETURE TRANSITIVE
 # | Input : matrice d'adjacence
 def transitiveClosure(adj_matr):
@@ -43,13 +48,14 @@ def transitiveClosure(adj_matr):
                 adj_matr[i][k] = 1
     ferm_trans = adj_matr
     return ferm_trans
-
-adj_mat = adjacence(graph4)
+#----------------------------------------------------------------------------------------------
+# TEST matrice d adjacente et fermeture transitive
+adj_mat = adjacence(graph1)
 adj_mat = adj_mat.astype(int)
 print("\nmatrice d'adjacence\n", adj_mat)
 trans_mat = transitiveClosure(adj_mat)
 print("\nfermeture transitive\n", trans_mat, "\n")
-
+#----------------------------------------------------------------------------------------------
 # DEEP FIRST SEARCH
 # input : Graphe (liste de liste) | SOLUTION FONCTIONNE MAIS INEXACTE
 visited = []
@@ -61,10 +67,17 @@ def dfs4(graph, sommet):
             dfs4(graph, voisins)
     return visited
 
-print("Deep First Search | sommets parcourus :\n", dfs4(graph4,0))
-
-
+print("Deep First Search | sommets parcourus :\n", dfs4(graph1,0))
+#----------------------------------------------------------------------------------------------
+# COMPOSANTE FORTEMENT CONNEXES
 # Rechercher les composantes fortement connexes : algo de propagation des + et -
 # On utilisera l algo DFS (Deep First Search) pour propager les +
 # Ensuite on contruira la matrice d adjacence des predecesseurs et on l utilisera l algo DFS
 # pour la propagation des -
+visited = []
+successeur = []
+def dfs5(graph, sommet, visited, successeur):
+    if sommet not in visited:
+        visited.append(sommet)
+        successeur.append
+
