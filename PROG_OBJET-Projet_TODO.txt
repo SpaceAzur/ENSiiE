@@ -1,0 +1,9 @@
+PROJET PROG OBJET
+
+TODO
+- Se familiariser avec mariadb
+- Connecter dbeaver avec mariadb
+- Créer BD sur dbeaver
+- Configurer sécurité de la BD
+- Comment s'identifier par défaut sur mariadb
+- ERASE : demander espace serveur
