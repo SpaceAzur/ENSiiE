@@ -1,5 +1,4 @@
 #!/usr/bin/python
-
 import math
 import numpy as np 
 import scipy
@@ -8,15 +7,18 @@ import sys
 from tarjan import *
 
 graph1 = [[1,2],[2],[3],[]]
-
 graph2 = [[1,2,4],[3],[0,3,5],[],[4,5],[4]]
-
 graph3 = [[1,3],[],[1,4],[5],[2,3],[]]
-
 graph4 = [[1,2,3],[2,5],[4],[],[],[6],[]]
 
-print("\ntest sur graphe suivant :", graph1)
 
+
+# INSERER LE GRAPHE TEST DANS CETTE VARIABLE "GRAPH"
+GRAPH = graph2
+
+
+
+print("\ntest sur graphe suivant :", GRAPH)
 #----------------------------------------------------------------------------------------------
 # | Construit la MATRICE D ADJACENCE
 # | input : matrice étudiée
@@ -50,7 +52,7 @@ def transitiveClosure(adj_matr):
     return ferm_trans
 #----------------------------------------------------------------------------------------------
 # TEST matrice d adjacente et fermeture transitive
-adj_mat = adjacence(graph1)
+adj_mat = adjacence(GRAPH)
 adj_mat = adj_mat.astype(int)
 print("\nmatrice d'adjacence\n", adj_mat)
 trans_mat = transitiveClosure(adj_mat)
@@ -67,7 +69,7 @@ def dfs4(graph, sommet):
             dfs4(graph, voisins)
     return visited
 
-print("Deep First Search | sommets parcourus :\n", dfs4(graph1,0))
+print("Deep First Search | sommets parcourus :\n", dfs4(GRAPH,0))
 #----------------------------------------------------------------------------------------------
 # COMPOSANTE FORTEMENT CONNEXES
 # Rechercher les composantes fortement connexes : algo de propagation des + et -
@@ -80,4 +82,5 @@ def dfs5(graph, sommet, visited, successeur):
     if sommet not in visited:
         visited.append(sommet)
         successeur.append
+    return None
 
