@@ -76,11 +76,5 @@ print("Deep First Search | sommets parcourus :\n", dfs4(GRAPH,0))
 # On utilisera l algo DFS (Deep First Search) pour propager les +
 # Ensuite on contruira la matrice d adjacence des predecesseurs et on l utilisera l algo DFS
 # pour la propagation des -
-visited = []
-successeur = []
-def dfs5(graph, sommet, visited, successeur):
-    if sommet not in visited:
-        visited.append(sommet)
-        successeur.append
-    return None
+
 
